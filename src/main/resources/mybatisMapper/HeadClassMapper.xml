@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.springboot.mybatis.mapper.HeadClassMapper">
+    <!--一对一的对应关系-->
+    <resultMap id="techermap" type="com.study.springboot.mybatis.entity.HeadTecher">
+        <id property="tid" column="ht_id" />
+        <result property="tname" column="ht_name" />
+        <result property="tage" column="ht_age" />
+    </resultMap>
+    <resultMap id="classmap" type="com.study.springboot.mybatis.entity.HeadClass">
+        <id property="cid" column="hc_id" />
+        <result property="cname" column="hc_name"/>
+        <association property="headTecher" column="ht_id" resultMap="techermap" />
+    </resultMap>
+
+    <select id="selectClassById" resultMap="classmap">
+        SELECT *FROM
+        headclass hc,headtecher ht
+        WHERE hc.ht_id=ht.ht_id
+        AND hc.hc_id=#{id}
+    </select>
+
+    <select id="getHeadTecher" resultMap="techermap">
+        SELECT * FROM headtecher
+    </select>
+
+    <!--一对多的对应关系-->
+    <resultMap id="classmap2" type="com.study.springboot.mybatis.entity.HeadClass">
+        <id property="cid" column="hc_id" />
+        <result property="cname" column="hc_name" />
+        <association property="headTecher" column="ht_id" resultMap="techermap" />
+        <collection property="students" ofType="com.study.springboot.mybatis.entity.Student">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="sex" column="sex"/>
+            <result property="age" column="age" />
+        </collection>
+    </resultMap>
+
+    <select id="selectClassAndStudentById" resultMap="classmap2">
+        SELECT
+        *FROM
+        headclass hc,student s,headtecher ht
+        WHERE
+        hc.hc_id=s.c_id AND hc.ht_id=ht.ht_id
+        AND
+        hc.hc_id=#{id}
+    </select>
+</mapper>
+        <!-- <resultMap id="classMap" type="com.study.springboot.mybatis.entity.HeadClass">
+               <id property="id" column="id"></id>
+               <result property="name" column="name"></result>
+               <association property="headTecher" javaType="com.study.springboot.mybatis.entity.HeadTecher">
+                   <id property="id" column="id"></id>
+                   <result property="hname" column="name"></result>
+                   <result property="age" column="age"></result>
+               </association>
+           </resultMap>-->
