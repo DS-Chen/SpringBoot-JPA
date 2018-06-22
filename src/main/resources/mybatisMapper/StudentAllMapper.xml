@@ -3,16 +3,16 @@
 <mapper namespace="com.study.springboot.mybatis.mapper.StudentAllMapper">
     <!--对应关系-->
     <resultMap id="studentmap" type="com.study.springboot.mybatis.entity.Student">
-        <id property="id" column="id"/>
-        <result property="name" column="name"/>
-        <result property="sex" column="sex" />
-        <result property="age" column="age" />
+        <id property="id" column="s_id"/>
+        <result property="name" column="s_name"/>
+        <result property="sex" column="s_sex" />
+        <result property="age" column="s_age" />
         <collection property="courses" resultMap="coursemap" />
     </resultMap>
     <resultMap id="coursemap" type="com.study.springboot.mybatis.entity.Course">
-        <id property="id" column="id" />
-        <result property="name" column="name" />
-        <result property="credit" column="credit" />
+        <id property="id" column="c_id" />
+        <result property="name" column="c_name" />
+        <result property="credit" column="c_credit" />
     </resultMap>
     <resultMap id="techermap" type="com.study.springboot.mybatis.entity.HeadTecher">
         <id property="tid" column="ht_id" />
@@ -30,9 +30,9 @@
         select
         *from
         student S
-        left join student_course SC on S.id=SC.s_id
-        left join course C on SC.c_id=C.id
-        left join headclass HC on S.c_id=HC.hc_id
+        left join student_course SC on S.s_id=SC.sc_sid
+        left join course C on SC.sc_cid=C.c_id
+        left join headclass HC on S.s_cid=HC.hc_id
         left join headtecher HT on HC.ht_id=HT.ht_id
         where 1=1
         <if test="id!=null">

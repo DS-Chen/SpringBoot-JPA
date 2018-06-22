@@ -4,14 +4,14 @@
 
     <!--resultMap 多对多的对应关系的映射-->
     <resultMap id="studentCourseMap" type="com.study.springboot.mybatis.entity.Student">
-        <id column="id" property="id"></id>
-        <result column="name" property="name"></result>
-        <result column="sex" property="sex"></result>
-        <result column="age" property="age"></result>
+        <id column="s_id" property="id"></id>
+        <result column="s_name" property="name"></result>
+        <result column="s_sex" property="sex"></result>
+        <result column="s_age" property="age"></result>
         <collection property="courses" ofType="com.study.springboot.mybatis.entity.Course">
-            <id property="id" column="id"></id>
-            <result property="name" column="name"></result>
-            <result property="credit" column="credit"></result>
+            <id property="id" column="c_id"></id>
+            <result property="name" column="c_name"></result>
+            <result property="credit" column="c_credit"></result>
         </collection>
     </resultMap>
     <select id="selectStudentCourse" resultMap="studentCourseMap">
@@ -19,6 +19,6 @@
           s.*,
           c.*
           FROM student s,course c,student_course sc
-          WHERE s.id=sc.s_id AND c.id=sc.c_id
+          WHERE s.s_id=sc.sc_sid AND c.c_id=sc.sc_cid
     </select>
 </mapper>

@@ -23,7 +23,8 @@ public class HeadClassController {
 
     @Autowired
     private HeadClassMapper headClassMapper;
-    @RequestMapping(value = "/classInfo",method = RequestMethod.GET,produces = {"application/json"})
+
+    @RequestMapping(value = "/getClassInfo",method = RequestMethod.GET,produces = {"application/json"})
     public DataResponseVo getClassInfo(@RequestParam(value = "id",required = true) Integer id){
         return new DataResponseVo(0,headClassMapper.selectClassById(id));
     }
