@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.study.springboot.mybatis.mapper.StudentAllMapper">
     <!--对应关系-->
     <resultMap id="studentmap" type="com.study.springboot.mybatis.entity.Student">
         <id property="id" column="s_id"/>
         <result property="name" column="s_name"/>
-        <result property="sex" column="s_sex" />
-        <result property="age" column="s_age" />
-        <collection property="courses" resultMap="coursemap" />
+        <result property="sex" column="s_sex"/>
+        <result property="age" column="s_age"/>
+        <collection property="courses" resultMap="coursemap"/>
     </resultMap>
     <resultMap id="coursemap" type="com.study.springboot.mybatis.entity.Course">
-        <id property="id" column="c_id" />
-        <result property="name" column="c_name" />
-        <result property="credit" column="c_credit" />
+        <id property="id" column="c_id"/>
+        <result property="name" column="c_name"/>
+        <result property="credit" column="c_credit"/>
     </resultMap>
     <resultMap id="techermap" type="com.study.springboot.mybatis.entity.HeadTecher">
-        <id property="tid" column="ht_id" />
-        <result property="tname" column="ht_name" />
-        <result property="tage" column="ht_age" />
+        <id property="tid" column="ht_id"/>
+        <result property="tname" column="ht_name"/>
+        <result property="tage" column="ht_age"/>
     </resultMap>
     <resultMap id="classmap" type="com.study.springboot.mybatis.entity.HeadClass">
-        <id property="cid" column="hc_id" />
+        <id property="cid" column="hc_id"/>
         <result property="cname" column="hc_name"/>
-        <association property="headTecher" column="ht_id" resultMap="techermap" />
-        <collection property="students" ofType="com.study.springboot.mybatis.entity.Student" resultMap="studentmap"/>
+        <association property="headTecher" column="ht_id" resultMap="techermap"/>
+        <collection property="students" ofType="com.study.springboot.mybatis.entity.Student"
+                    resultMap="studentmap"/>
     </resultMap>
 
     <select id="linkTableSel" resultMap="classmap">
@@ -40,13 +42,13 @@
         </if>
     </select>
 </mapper>
-<!--S.id AS s_id,
-        S.name AS s_name,
-        S.sex AS s_sex,
-        S.age AS s_age,
-        C.name AS c_name,
-        C.credit AS c_credit,
-        HC.name AS hc_name,
-        HT.name AS ht_name,
-        HT.age AS ht_age
--->
+        <!--S.id AS s_id,
+                S.name AS s_name,
+                S.sex AS s_sex,
+                S.age AS s_age,
+                C.name AS c_name,
+                C.credit AS c_credit,
+                HC.name AS hc_name,
+                HT.name AS ht_name,
+                HT.age AS ht_age
+        -->

@@ -54,7 +54,7 @@ create table headclass(
     foreign key(ht_id) references headtecher(ht_id)
 )engine=InnoDB default charset=utf8
 
-insert into headclass(hc_name,ht_id) values('软件工程（1）班',1);
+insert into headclass(hc_name,ht_id) values('软件工程（1）班',1) ;
 insert into headclass(hc_name,ht_id) values('软件工程（2）班',2)
 
 

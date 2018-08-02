@@ -43,55 +43,45 @@ public class UserController {
 
     /**
      * 查询单一用户
-     * @param name
-     * @param subname
-     * @return
      */
     @RequestMapping(value = "/singleuser", method = RequestMethod.GET, produces = {"application/json"})
-    public List<User> getSingleUser(@RequestParam(value = "name",required = false) String name,
-                                    @RequestParam(value = "subname",required = false) String subname) {
-        return userService.getSingleUser(name,subname);
+    public List<User> getSingleUser(@RequestParam(value = "name", required = false) String name,
+                                    @RequestParam(value = "subname", required = false) String subname) {
+        return userService.getSingleUser(name, subname);
     }
 
     /**
      * 查询所有用户信息
-     * @return
      */
     @RequestMapping(value = "/findAll", method = RequestMethod.GET, produces = {"application/json"})
     public DataResponseVo findAllUser() {
         List<User> users = userDao.findAll();
-        return new DataResponseVo(0,users);
+        return new DataResponseVo(0, users);
     }
 
     /**
      * 插入用户地址
-     * @param address
-     * @return
      */
-    @RequestMapping(value = "/insertAddress",method = RequestMethod.POST,produces = {"application/json"})
-    public DataResponseVo insertAddress(@RequestBody Address address){
-            address.getAddress();
-            return new DataResponseVo(0,addressDao.saveAndFlush(address));
+    @RequestMapping(value = "/insertAddress", method = RequestMethod.POST, produces = {"application/json"})
+    public DataResponseVo insertAddress(@RequestBody Address address) {
+        address.getAddress();
+        return new DataResponseVo(0, addressDao.saveAndFlush(address));
     }
 
     /**
      * 插入身份证号
-     * @param idCard
-     * @return
      */
-    @RequestMapping(value = "/insertIdcard",method = RequestMethod.POST,produces = {"application/json"})
-    public DataResponseVo insertIdCard(@RequestBody IdCard idCard){
+    @RequestMapping(value = "/insertIdcard", method = RequestMethod.POST, produces = {"application/json"})
+    public DataResponseVo insertIdCard(@RequestBody IdCard idCard) {
         idCard.getNum();
-        return new DataResponseVo(0,idCardDao.saveAndFlush(idCard));
+        return new DataResponseVo(0, idCardDao.saveAndFlush(idCard));
     }
 
     /**
      * 插入新用户信息
-     * @param user
-     * @return
      */
-    @RequestMapping(value = "/insertUser",method = RequestMethod.POST,produces = {"application/json"})
-    public DataResponseVo insertUser(@RequestBody User user){
+    @RequestMapping(value = "/insertUser", method = RequestMethod.POST, produces = {"application/json"})
+    public DataResponseVo insertUser(@RequestBody User user) {
         user.getName();
         user.getSubname();
         user.getPassword();
@@ -100,54 +90,44 @@ public class UserController {
         user.getRoles();
         user.getAddresses();
         user.getRoles();
-       return new DataResponseVo(0,userDao.saveAndFlush(user));
+        return new DataResponseVo(0, userDao.saveAndFlush(user));
     }
 
     /**
      * 查询用户信息byid
-     * @param id
-     * @return
      */
-    @RequestMapping(value = "/findUserInfoById",method = RequestMethod.GET,produces = {"application/json"})
-    public DataResponseVo findUserInfoById(@RequestParam(value = "id") Integer id){
-        return new DataResponseVo(0,userDao.findById(id));
+    @RequestMapping(value = "/findUserInfoById", method = RequestMethod.GET, produces = {"application/json"})
+    public DataResponseVo findUserInfoById(@RequestParam(value = "id") Integer id) {
+        return new DataResponseVo(0, userDao.findById(id));
     }
 
     /**
      * 获取角色
-     * @return
      */
-    @RequestMapping(value = "/findRole",method = RequestMethod.GET,produces = {"application/json"})
-    public DataResponseVo findRoleInfo(@RequestParam(value = "name",required = true) String name){
-        return new DataResponseVo(0,roleDao.withByRoleName(name));
+    @RequestMapping(value = "/findRole", method = RequestMethod.GET, produces = {"application/json"})
+    public DataResponseVo findRoleInfo(@RequestParam(value = "name", required = true) String name) {
+        return new DataResponseVo(0, roleDao.withByRoleName(name));
 
     }
 
     /**
      * 更新用户信息
-     * @param id
-     * @param name
-     * @param password
-     * @param telephone
-     * @return
      */
-    @RequestMapping(value = "/updateUserInfo",method = RequestMethod.GET,produces = {"application/json"})
+    @RequestMapping(value = "/updateUserInfo", method = RequestMethod.GET, produces = {"application/json"})
     public DataResponseVo updateUserInfo(@RequestParam(value = "id") Integer id,
                                          @RequestParam(value = "name") String name,
                                          @RequestParam(value = "password") String password,
-                                         @RequestParam(value = "telephone") String telephone){
-        userService.updateUser(id,name,password,telephone);
-        return new DataResponseVo(0,"更新成功");
+                                         @RequestParam(value = "telephone") String telephone) {
+        userService.updateUser(id, name, password, telephone);
+        return new DataResponseVo(0, "更新成功");
     }
 
     /**
      * 删除用户
-     * @param id
-     * @return
      */
-    @RequestMapping(value = "/deleteUser",method = RequestMethod.GET,produces = {"application/json"})
-    public DataResponseVo DeleteUser(@RequestParam(value = "id") Integer id){
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.GET, produces = {"application/json"})
+    public DataResponseVo DeleteUser(@RequestParam(value = "id") Integer id) {
         userService.deleteUser(id);
-        return  new DataResponseVo(0,"删除成功");
+        return new DataResponseVo(0, "删除成功");
     }
 }

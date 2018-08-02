@@ -20,20 +20,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin
 @RequestMapping("/student")
-public class StudentController{
+public class StudentController {
 
     @Autowired
     private StudentMapper studentMapper;
     @Autowired
     private StudentAllMapper studentAllMapper;
 
-    @RequestMapping(value = "/info",method = RequestMethod.GET,produces = {"application/json"})
-    public DataResponseVo getStudentInfo(){
-        return new DataResponseVo(0,studentMapper.selectStudentCourse());
+    /**
+     * 学生课程信息多对多
+     */
+    @RequestMapping(value = "/info", method = RequestMethod.GET, produces = {"application/json"})
+    public DataResponseVo getStudentInfo() {
+        return new DataResponseVo(0, studentMapper.selectStudentCourse());
     }
-    @RequestMapping(value = "/linktable",method = RequestMethod.GET,produces = {"application/json"})
-    public DataResponseVo getlinkTableSel(@RequestParam(value = "id",required = true) Integer id){
-        return new DataResponseVo(0,studentAllMapper.linkTableSel(id));
+
+    /**
+     * 全部关于学生的信息
+     */
+    @RequestMapping(value = "/linktable", method = RequestMethod.GET, produces = {"application/json"})
+    public DataResponseVo getlinkTableSel(@RequestParam(value = "id", required = true) Integer id) {
+        return new DataResponseVo(0, studentAllMapper.linkTableSel(id));
     }
 
 }
